@@ -1,1 +1,1 @@
-A web app that insults you
+A simple CRM written with Node and Angular
