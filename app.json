@@ -1,0 +1,8 @@
+{
+  "name": "insult",
+  "description": "An application that insults you",
+  "repository": "https://github.com/NerdcoreSteve/insult",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["insult"],
+  "image": "heroku/nodejs"
+}
