@@ -1,61 +1,10 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-//TODO Your mother is elderberries!
 'use strict';
 
 var R = require('ramda');
-var subject = require('./subject.js');
-var verb = require('./verb.js');
-var object = require('./object.js');
 
-var insult = function insult(insult_data, subject_index, verb_index, object_index) {
-    return R.compose(function (insult_object) {
-        return insult_object.subject + ' ' + insult_object.verb + ' ' + insult_object.object + '!';
-    }, object(object_index), verb(verb_index), subject(subject_index))(insult_data);
-};
-
-module.exports = insult;
-},{"./object.js":5,"./subject.js":7,"./verb.js":8,"ramda":4}],2:[function(require,module,exports){
-'use strict';
-
-module.exports = {
-    subjects: [{
-        part: 'You',
-        first_person: true
-    }, {
-        part: 'Your mother',
-        first_person: false
-    }, {
-        part: 'Your father',
-        first_person: false
-    }],
-    verbs: [{
-        first_person: 'smell like',
-        third_person: 'smells like',
-        plural: true
-    }, {
-        first_person: 'are',
-        third_person: 'is',
-        plural: false
-    }, {
-        first_person: 'consort with',
-        third_person: 'consorts with',
-        plural: true
-    }],
-    objects: ['a hamster', 'elderberries']
-};
-},{}],3:[function(require,module,exports){
-'use strict';
-
-var insult = require('./insult');
-var rand = require('./rand.js');
-var insult_data = require('./insult_data');
-
-//Impure app code
-//TODO keyboard bindings
-document.querySelector('.insult-button').onclick = function () {
-    return document.querySelector('.insult').innerHTML = insult(insult_data, rand(0, insult_data.subjects.length - 1), rand(0, insult_data.verbs.length - 1), rand(0, insult_data.objects.length - 1));
-};
-},{"./insult":1,"./insult_data":2,"./rand.js":6}],4:[function(require,module,exports){
+console.log(R);
+},{"ramda":2}],2:[function(require,module,exports){
 //  Ramda v0.21.0
 //  https://github.com/ramda/ramda
 //  (c) 2013-2016 Scott Sauyet, Michael Hurley, and David Chambers
@@ -8841,46 +8790,4 @@ document.querySelector('.insult-button').onclick = function () {
 
 }.call(this));
 
-},{}],5:[function(require,module,exports){
-'use strict';
-
-var R = require('ramda');
-
-var object_lens = R.lens(R.prop('objects'), R.assoc('object'));
-
-module.exports = R.curry(function (object_index, insult_data) {
-    return R.compose(R.over(object_lens, R.nth(object_index)))(insult_data);
-});
-},{"ramda":4}],6:[function(require,module,exports){
-'use strict';
-
-var R = require('ramda');
-
-module.exports = R.curry(function (min, max) {
-  return Math.round(Math.random() * (max - min) + min);
-});
-},{"ramda":4}],7:[function(require,module,exports){
-'use strict';
-
-var R = require('ramda');
-
-var subject_lens = R.lens(R.prop('subjects'), R.assoc('subject'));
-
-var first_person_lens = R.lens(R.prop('subjects'), R.assoc('first_person'));
-
-module.exports = R.curry(function (subject_index, insult_data) {
-    return R.compose(R.omit(['subjects']), R.over(first_person_lens, R.compose(R.prop('first_person'), R.nth(subject_index))), R.over(subject_lens, R.compose(R.prop('part'), R.nth(subject_index))))(insult_data);
-});
-},{"ramda":4}],8:[function(require,module,exports){
-'use strict';
-
-var R = require('ramda');
-
-var verb_lens = R.lens(R.prop('verbs'), R.assoc('verb'));
-
-module.exports = R.curry(function (verb_index, insult_data) {
-    return R.compose(R.omit(['verbs']), R.assoc('plural', insult_data.verbs[verb_index].plural), R.over(verb_lens, R.compose(R.ifElse(function () {
-        return insult_data.first_person;
-    }, R.prop('first_person'), R.prop('third_person')), R.nth(verb_index))))(insult_data);
-});
-},{"ramda":4}]},{},[3]);
+},{}]},{},[1]);

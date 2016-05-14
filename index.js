@@ -3,7 +3,7 @@ var app = express()
 app.set("view engine", "pug")
 app.use("/public", express.static("public"))
 
-app.set("port", (process.env.PORT || 5000))
+app.set("port", (process.env.PORT || 3000))
 
 app.get("/", function (req, res) {  
     res.render("index")
