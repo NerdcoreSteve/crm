@@ -3,7 +3,10 @@
 
 var R = require('ramda');
 
-console.log(R);
+console.log(R.map(function (x) {
+  return 3 * x;
+}, [1, 2, 3, 4, 5]));
+
 },{"ramda":2}],2:[function(require,module,exports){
 //  Ramda v0.21.0
 //  https://github.com/ramda/ramda
